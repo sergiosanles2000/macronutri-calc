@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Calorías Diarias (TDEE) y Reparto de Macros | MacroNutri</title>
+  <meta name="description" content="Calcula con precisión tu gasto energético diario (TDEE), déficit calórico para perder grasa y gramos de proteína, carbohidratos y grasas.">
+  <link rel="canonical" href="https://sergiosanles2000.github.io/macronutri-calc/index.html">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sergiosanles2000.github.io/macronutri-calc/index.html">
+  <meta property="og:title" content="Calculadora de Calorías Diarias (TDEE) y Reparto de Macros | MacroNutri">
+  <meta property="og:description" content="Calcula con precisión tu gasto energético diario (TDEE), déficit calórico para perder grasa y gramos de proteína, carbohidratos y grasas.">
+  <meta property="og:site_name" content="MacroNutri">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculadora de Calorías Diarias (TDEE) y Reparto de Macros">
+  <meta name="twitter:description" content="Calcula con precisión tu gasto energético diario (TDEE), déficit calórico para perder grasa y gramos de proteína, carbohidratos y grasas.">
+
+  <!-- Google AdSense Tag placeholder (Ready to activate upon publisher approval) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script> -->
+
+  <link rel="stylesheet" href="style.css">
+  
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "MacroNutri - Calculadora Científica TDEE y Macronutrientes",
+  "url": "https://sergiosanles2000.github.io/macronutri-calc/index.html",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "description": "Calcula tu gasto energético diario (TDEE), déficit para perder grasa o superávit para ganar músculo y reparto de proteínas, carbohidratos y grasas."
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuánta proteína necesito al día para ganar o mantener músculo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La evidencia científica recomienda entre 1,6 g y 2,2 g de proteína por kilo de peso corporal para personas activas o en déficit calórico."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Engordan los carbohidratos por la noche?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No; lo determinante en la ganancia de grasa es el balance calórico global acumulado a lo largo del día, no la hora de consumo."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <span>🥗</span>
+        <span>MacroNutri</span>
+        <span class="brand-badge">Salud & Nutrición</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#nutrition-form">Calculadora Macros</a></li><li><a href="#mealsBreakdown">Reparto por Comidas</a></li><li><a href="#editorial-guide">Guía Científica</a></li>
+        <li>
+          <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema de color">
+            🌓 Tema
+          </button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container" style="padding-top: 1.5rem; padding-bottom: 3rem;">
+    
+        <div class="ad-slot-wrapper">
+          <span class="ad-label">Publicidad</span>
+          <div class="ad-slot ad-slot-leaderboard" data-slot="header-leaderboard">
+            <span>Espacio Publicitario Disponible &bull; Formato Leaderboard 728x90 / Responsive</span>
+          </div>
+        </div>
+        
+    
+    <!-- Hero Header -->
+    <section class="hero">
+      <span class="hero-badge">Nutrición Basada en Evidencia Científica</span>
+      <h1>Calculadora de Calorías Diarias (TDEE) y Reparto de Macronutrientes</h1>
+      <p>Calcula tu gasto energético total, ajusta tu déficit calórico para perder grasa o superávit para ganar músculo y distribuye tus macros de forma personalizada.</p>
+    </section>
+
+    <!-- Medical Disclaimer Callout -->
+    <div class="callout callout-warning">
+      <strong>Aviso de Salud:</strong> Esta herramienta tiene fines exclusivamente divulgativos y educativos. Las necesidades calóricas reales pueden variar según condiciones médicas, historial endocrino o composición corporal. Consulta con un dietista-nutricionista colegiado antes de iniciar cualquier cambio drástico en tu alimentación.
+    </div>
+
+    <!-- Main Tool Grid -->
+    <div class="app-grid">
+      <!-- Calculator Inputs -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">1. Datos Físicos y Nivel de Actividad</h2>
+          <p class="card-subtitle">Fórmula de Mifflin-St Jeor de alta precisión.</p>
+        </div>
+        
+        <form id="nutrition-form" onsubmit="event.preventDefault();">
+          <div class="form-group">
+            <label class="form-label">Sexo Biológico</label>
+            <div style="display: flex; gap: 2rem;">
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                <input type="radio" name="gender" value="male" checked> Hombre
+              </label>
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                <input type="radio" name="gender" value="female"> Mujer
+              </label>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="age">Edad</label>
+              <input type="number" id="age" class="form-control" value="28" min="15" max="95">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="weight">Peso (kg)</label>
+              <input type="number" id="weight" class="form-control" value="75" min="35" max="220" step="0.5">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="height">Altura (cm)</label>
+              <input type="number" id="height" class="form-control" value="178" min="120" max="230">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="activity">Nivel de Actividad Diaria</label>
+            <select id="activity" class="form-control">
+              <option value="1.2">Sedentario (Trabajo de oficina, poco o ningún ejercicio)</option>
+              <option value="1.375">Ligero (Ejercicio ligero 1-3 días por semana)</option>
+              <option value="1.55" selected>Moderado (Entrenamiento 3-5 días por semana)</option>
+              <option value="1.725">Intenso (Entrenamiento duro 6-7 días por semana)</option>
+              <option value="1.9">Muy Intenso (Atleta profesional / trabajo físico muy duro)</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="goal">Objetivo Nutricional</label>
+              <select id="goal" class="form-control">
+                <option value="-0.20" selected>Pérdida de Grasa (-20% Déficit)</option>
+                <option value="-0.10">Definición Suave (-10% Déficit)</option>
+                <option value="0">Mantenimiento de Peso (0%)</option>
+                <option value="0.10">Volumen Limpio (+10% Superávit)</option>
+                <option value="0.20">Ganancia de Masa (+20% Superávit)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="dietRatio">Distribución de Macros</label>
+              <select id="dietRatio" class="form-control">
+                <option value="balanced" selected>Equilibrada (45% C / 30% P / 25% F)</option>
+                <option value="high_protein">Alta en Proteína (35% C / 35% P / 30% F)</option>
+                <option value="low_carb">Baja en Carbohidratos (20% C / 35% P / 45% F)</option>
+                <option value="keto">Cetogénica / Keto (5% C / 25% P / 70% F)</option>
+              </select>
+            </div>
+          </div>
+        </form>
+
+        <!-- In-Calculator Ad Slot -->
+        <div class="ad-slot-wrapper" style="margin: 1.5rem 0 0;">
+          <span class="ad-label">Publicidad</span>
+          <div class="ad-slot" data-slot="in-calc-nutrition">
+            <span>Espacio de Anuncio en Calculadora &bull; Suplementación / Nutrición Deportiva</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Results Summary -->
+      <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="card-header">
+            <h2 class="card-title">Tus Calorías y Macros Diarios</h2>
+            <p class="card-subtitle">Objetivo diario adaptado a tu metabolismo y meta física.</p>
+          </div>
+
+          <div class="kpi-card" style="margin-bottom: 1rem;">
+            <div class="kpi-label">Calorías Objetivo Diarias</div>
+            <div class="kpi-val highlight" id="resTargetCalories">0 kcal</div>
+            <p class="form-help" style="margin-top: 0.35rem;">Ingesta calórica recomendada cada día para tu objetivo</p>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Metabolismo Basal (BMR)</div>
+              <div class="kpi-val" style="font-size: 1.3rem;" id="resBmr">0 kcal</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Gasto Total Diario (TDEE)</div>
+              <div class="kpi-val" style="font-size: 1.3rem; color: var(--primary);" id="resTdee">0 kcal</div>
+            </div>
+          </div>
+
+          <div class="table-responsive" style="margin: 1rem 0 0;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Macronutriente</th>
+                  <th>Gramos / Día</th>
+                  <th>Aporte Energético</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Proteínas (4 kcal/g)</strong></td>
+                  <td id="resProteinGrams" style="font-weight: 700; color: var(--primary);">0 g</td>
+                  <td id="resProteinKcal">0 kcal</td>
+                </tr>
+                <tr>
+                  <td><strong>Carbohidratos (4 kcal/g)</strong></td>
+                  <td id="resCarbsGrams" style="font-weight: 700;">0 g</td>
+                  <td id="resCarbsKcal">0 kcal</td>
+                </tr>
+                <tr>
+                  <td><strong>Grasas Saludables (9 kcal/g)</strong></td>
+                  <td id="resFatGrams" style="font-weight: 700;">0 g</td>
+                  <td id="resFatKcal">0 kcal</td>
+                </tr>
+                <tr>
+                  <td><strong>Agua Recomendada</strong></td>
+                  <td id="resWaterLiters" colspan="2" style="font-weight: 700; color: var(--success);">0 L / día</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Meal Distribution Planner -->
+    <div class="card" style="margin-bottom: 3rem;">
+      <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div>
+          <h2 class="card-title">2. Planificador de Reparto por Comidas</h2>
+          <p class="card-subtitle">Divide tus calorías y macronutrientes en función de tus tomas diarias.</p>
+        </div>
+        <div style="margin-top: 0.5rem;">
+          <label style="font-size: 0.85rem; font-weight: 600; margin-right: 0.5rem;" for="mealsCount">Número de comidas:</label>
+          <select id="mealsCount" class="form-control" style="width: auto; display: inline-block;">
+            <option value="3" selected>3 Comidas</option>
+            <option value="4">4 Comidas</option>
+            <option value="5">5 Comidas</option>
+          </select>
+        </div>
+      </div>
+      <div id="mealsBreakdown">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- Section 3: Authoritative Guide -->
+    <article class="editorial-section">
+      <h2>Guía Científica: Cómo Estructurar Calorías y Macronutrientes con Éxito</h2>
+      <p>Alcanzar un cambio físico sostenible no depende de dietas de moda ni de eliminar alimentos enteros, sino de aplicar los principios fundamentales del <strong>balance energético</strong> y la <strong>distribución adecuada de nutrientes</strong>.</p>
+
+      <h3>1. La Jerarquía Nutricional de la Pérdida de Grasa</h3>
+      <p>Basado en los consensos científicos de nutrición deportiva, el orden estricto de prioridades es:</p>
+      <ol>
+        <li><strong>Balance Calórico (Déficit / Superávit):</strong> Es el factor indispensable que determina si ganas, mantienes o pierdes peso. Un déficit calórico moderado (entre el 15% y el 25%) permite quemar tejido adiposo preservando la masa muscular.</li>
+        <li><strong>Macronutrientes:</strong> Asegurar entre 1,6 g y 2,2 g de proteína por kilo de peso corporal protege la masa magra durante la restricción calórica y maximiza la saciedad. Las grasas deben situarse en torno al 0,7 - 1,0 g/kg para mantener un perfil hormonal óptimo.</li>
+        <li><strong>Micronutrientes e Hidratación:</strong> Minerales, vitaminas y suficiente agua para evitar la retención hídrica y garantizar el rendimiento neuromuscular.</li>
+      </ol>
+
+      <h3>2. ¿Por qué las dietas extremas provocan efecto rebote?</h3>
+      <p>Cuando se recortan calorías drásticamente (déficits superiores al 35%), el organismo activa mecanismos de supervivencia: desciende la leptina (hormona de la saciedad), se dispara la grelina (hormona del hambre) y la termogénesis no asociada al ejercicio (NEAT) se desploma de forma involuntaria. Un déficit controlado del 15% al 20% es el rango comprobado más seguro para perder grasa semana a semana sin estancar el metabolismo.</p>
+    </article>
+
+    <!-- Mid-article Ad Slot -->
+    <div class="ad-slot-wrapper">
+      <span class="ad-label">Publicidad</span>
+      <div class="ad-slot ad-slot-leaderboard" data-slot="mid-guide-nutrition">
+        <span>Espacio de Publicidad Contextual &bull; Balanzas de Precisión / Alimentación Saludable</span>
+      </div>
+    </div>
+
+    <!-- Section 4: FAQ -->
+    <section class="editorial-section">
+      <h2>Preguntas Frecuentes sobre Calorías y Macros (FAQ)</h2>
+      
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>¿Es necesario contar calorías para perder peso?</span>
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No es obligatorio de por vida, pero contar calorías durante unas semanas es la herramienta pedagógica más potente para aprender la densidad calórica real de los alimentos. Muchas personas creen erróneamente comer poco cuando pequeños añadidos (aceite, frutos secos, salsas) aportan cientos de calorías ocultas.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>¿Cuánta proteína necesito realmente al día?</span>
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Para personas sedentarias, la OMS recomienda un mínimo de 0,8 g/kg. Sin embargo, para personas activas que realizan entrenamiento de fuerza o buscan perder grasa manteniendo músculo, la literatura científica recomienda situarse entre <strong>1,6 g y 2,2 g por kilogramo de peso corporal</strong>.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>¿Engordan más los carbohidratos por la noche?</span>
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Un carbohidrato contiene 4 kilocalorías a las 8 de la mañana y exactamente 4 kilocalorías a las 10 de la noche. Lo determinante en la ganancia de grasa es el balance calórico global de las 24 horas y de la semana completa, no la hora exacta de ingesta.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>MacroNutri</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 1rem;">Calculadora científica de calorías diarias (TDEE) y reparto óptimo de macronutrientes.</p>
+          <p class="form-help">&copy; 2026 MacroNutri. Todos los derechos reservados.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Herramientas</h4>
+          <ul class="footer-links">
+            <li><a href="#nutrition-form">Calculadora Macros</a></li><li><a href="#mealsBreakdown">Reparto por Comidas</a></li><li><a href="#editorial-guide">Guía Científica</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal & Privacidad</h4>
+          <ul class="footer-links">
+            <li><a href="privacidad.html">Política de Privacidad</a></li>
+            <li><a href="terminos.html">Términos de Uso</a></li>
+            <li><a href="cookies.html">Política de Cookies</a></li>
+            <li><a href="aviso-legal.html">Aviso Legal (LSSI)</a></li>
+            <li><a href="contacto.html">Contacto y Soporte</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Herramienta divulgativa independiente. Los resultados son estimaciones basadas en normativas públicas vigentes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GDPR / ePrivacy Cookie Consent Banner -->
+  <div id="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+    <h4 id="cookie-title" style="margin-bottom: 0.5rem; font-size: 1rem;">Privacidad y Cookies</h4>
+    <p>Utilizamos cookies propias y de terceros para optimizar la experiencia de navegación, analizar el tráfico y personalizar la publicidad conforme a nuestras <a href="privacidad.html">políticas</a>.</p>
+    <div class="cookie-actions">
+      <button id="cookie-accept" class="btn-cookie btn-cookie-accept">Aceptar todas</button>
+      <button id="cookie-reject" class="btn-cookie">Rechazar no esenciales</button>
+    </div>
+  </div>
+
+  <script src="common.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
